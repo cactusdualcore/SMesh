@@ -1,8 +1,7 @@
 use std::collections::HashSet;
 
-use crate::{bail, prelude::*};
+use crate::prelude::*;
 use bevy::utils::default;
-use itertools::Itertools;
 
 use super::mesh_query::{HalfedgeOps, RunQuery};
 

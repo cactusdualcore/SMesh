@@ -1,6 +1,5 @@
 use std::collections::HashSet;
 
-use bevy::log::info;
 use itertools::Itertools;
 
 use crate::{bail, prelude::*};
@@ -511,7 +510,6 @@ impl SMesh {
 #[cfg(test)]
 mod test {
     use super::*;
-    use crate::prelude::*;
     use glam::vec3;
 
     #[test]

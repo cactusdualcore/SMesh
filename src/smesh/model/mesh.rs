@@ -1,7 +1,6 @@
 use std::collections::HashMap;
 
 use attribute::CustomAttributeMap;
-use bevy::log::info;
 use glam::{Vec2, Vec3};
 use itertools::Itertools;
 use slotmap::{SecondaryMap, SlotMap};
@@ -351,7 +350,7 @@ impl MeshMutator<'_, FaceId> {
         Ok(())
     }
 
-    pub fn delete(mut self) -> SMeshResult<()> {
+    pub fn delete(self) -> SMeshResult<()> {
         self.conn.faces.remove(self.value);
         Ok(())
     }

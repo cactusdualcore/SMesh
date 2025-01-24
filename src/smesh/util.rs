@@ -82,8 +82,6 @@ impl SMesh {
         //     self.make_face(reversed_vertices)?;
         // }
         todo!();
-
-        Ok(())
     }
     pub fn get_face_centroid(&self, face: FaceId) -> SMeshResult<Vec3> {
         let face_vertices = face.vertices(self).collect_vec();
