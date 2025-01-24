@@ -10,13 +10,11 @@ pub struct HalfedgeAroundVertexIter<'a> {
     start: HalfedgeId,
     current: Option<HalfedgeId>,
 }
-impl<'a> Iterator for HalfedgeAroundVertexIter<'a> {
+impl Iterator for HalfedgeAroundVertexIter<'_> {
     type Item = HalfedgeId;
 
     fn next(&mut self) -> Option<Self::Item> {
-        let Some(current) = self.current else {
-            return None;
-        };
+        let current = self.current?;
         let next = current.ccw_rotated_neighbour().run(self.conn).ok();
         self.current = if next == Some(self.start) { None } else { next };
         Some(current)
@@ -29,13 +27,11 @@ pub struct VertexAroundVertexIter<'a> {
     start: HalfedgeId,
     current: Option<HalfedgeId>,
 }
-impl<'a> Iterator for VertexAroundVertexIter<'a> {
+impl Iterator for VertexAroundVertexIter<'_> {
     type Item = VertexId;
 
     fn next(&mut self) -> Option<Self::Item> {
-        let Some(current) = self.current else {
-            return None;
-        };
+        let current = self.current?;
         let dst_vert = current.dst_vert().run(self.conn);
         let next = current.ccw_rotated_neighbour().run(self.conn).ok();
         self.current = if next == Some(self.start) { None } else { next };
@@ -49,15 +45,12 @@ pub struct FaceAroundVertexIter<'a> {
     start: HalfedgeId,
     current: Option<HalfedgeId>,
 }
-impl<'a> Iterator for FaceAroundVertexIter<'a> {
+impl Iterator for FaceAroundVertexIter<'_> {
     type Item = FaceId;
 
     fn next(&mut self) -> Option<Self::Item> {
         loop {
-            let Some(current) = self.current else {
-                return None;
-            };
-
+            let current = self.current?;
             let face = current.face().run(self.conn);
             let next = current.ccw_rotated_neighbour().run(self.conn).ok();
             self.current = if next == Some(self.start) { None } else { next };
@@ -75,13 +68,11 @@ pub struct VertexAroundFaceIter<'a> {
     current: Option<HalfedgeId>,
 }
 
-impl<'a> Iterator for VertexAroundFaceIter<'a> {
+impl Iterator for VertexAroundFaceIter<'_> {
     type Item = VertexId;
 
     fn next(&mut self) -> Option<Self::Item> {
-        let Some(current) = self.current else {
-            return None;
-        };
+        let current = self.current?;
         let dst_vert = current.dst_vert().run(self.conn);
         let next = current.next().run(self.conn).ok();
         self.current = if next == Some(self.start) { None } else { next };
@@ -96,13 +87,11 @@ pub struct HalfedgeAroundFaceIter<'a> {
     current: Option<HalfedgeId>,
 }
 
-impl<'a> Iterator for HalfedgeAroundFaceIter<'a> {
+impl Iterator for HalfedgeAroundFaceIter<'_> {
     type Item = HalfedgeId;
 
     fn next(&mut self) -> Option<Self::Item> {
-        let Some(current) = self.current else {
-            return None;
-        };
+        let current = self.current?;
         let next = current.next().run(self.conn).ok();
         self.current = if next == Some(self.start) { None } else { next };
         Some(current)
@@ -195,6 +184,7 @@ impl FaceIterators for FaceId {
     }
 }
 
+#[cfg(test)]
 mod test {
     use super::*;
     use glam::vec3;

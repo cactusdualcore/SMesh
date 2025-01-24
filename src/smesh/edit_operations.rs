@@ -35,10 +35,10 @@ impl SMesh {
         let mut vertex_map = HashMap::new();
         for &face in faces.iter() {
             for vertex in face.vertices(self).collect_vec() {
-                if !vertex_map.contains_key(&vertex) {
+                if let std::collections::hash_map::Entry::Vacant(e) = vertex_map.entry(vertex) {
                     let position = vertex.position(self)?;
                     let new_vertex = self.add_vertex(position);
-                    vertex_map.insert(vertex, new_vertex);
+                    e.insert(new_vertex);
                 }
             }
         }

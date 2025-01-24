@@ -1,4 +1,4 @@
-use std::{collections::HashMap, f32::consts::PI, usize};
+use std::{collections::HashMap, f32::consts::PI};
 
 use glam::{vec3, U16Vec3};
 use itertools::Itertools;
