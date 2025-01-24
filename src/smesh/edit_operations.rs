@@ -374,7 +374,7 @@ impl SMesh {
                 self.uvs.as_mut().unwrap().insert(v_map[&id], value);
             }
         }
-        // TODO: copy custom attributes 
+        // TODO: copy custom attributes
         // for attr in self.vertex_attributes {
         //
         // }

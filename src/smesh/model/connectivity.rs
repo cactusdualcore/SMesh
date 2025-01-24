@@ -1,6 +1,9 @@
 use slotmap::SlotMap;
 
-use crate::prelude::{model::mesh_elements::{Face, FaceId, Halfedge, HalfedgeId, Vertex, VertexId}, SMeshError};
+use crate::prelude::{
+    model::mesh_elements::{Face, FaceId, Halfedge, HalfedgeId, Vertex, VertexId},
+    SMeshError,
+};
 
 #[derive(Debug, Clone, Default)]
 pub struct Connectivity {
